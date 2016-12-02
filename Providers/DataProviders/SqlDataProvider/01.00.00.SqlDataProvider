@@ -1,0 +1,38 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM sys.objects WHERE [object_id] = OBJECT_ID(N'{databaseOwner}[{objectQualifier}FreeSource_HtmlText]') AND type in (N'U'))
+	DROP TABLE {databaseOwner}[{objectQualifier}FreeSource_HtmlText]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}FreeSource_HtmlText
+(	
+	[ItemID] [int] IDENTITY(1,1) NOT NULL,
+	[ModuleID] [int] NOT NULL,
+	[Locale] [nvarchar](5) NULL,
+	[ModuleTitle] [nvarchar](255) NULL,
+	[Content] [ntext] NULL,
+	[Summary] [ntext] NULL,
+	[Version] [int] NULL,
+	[IsPublished] [bit] NULL,
+	[CreatedByUserID] [int] NULL,
+	[CreatedOnDate] [datetime] NULL,
+	[LastModifiedByUserID] [int] NULL,
+	[LastModifiedOnDate] [datetime] NULL	
+)
+GO
+
+
+ALTER TABLE {databaseOwner}[{objectQualifier}FreeSource_HtmlText] ADD CONSTRAINT [PK_{objectQualifier}FreeSource_HtmlText] PRIMARY KEY CLUSTERED ([ItemId])
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

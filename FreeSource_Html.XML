@@ -1,0 +1,769 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FreeSource_Html</name>
+    </assembly>
+    <members>
+        <member name="T:FreeSource.Modules.Html.Components.FeatureController">
+            -----------------------------------------------------------------------------
+            <summary>
+            The Controller class for Html
+            
+            The FeatureController class is defined as the BusinessController in the manifest file (.dnn)
+            DotNetNuke will poll this class to find out which Interfaces the class implements. 
+            
+            The IPortable interface is used to import/export content from a DNN module
+            
+            The ISearchable interface is used by DNN to index the content of a module
+            
+            The IUpgradeable interface allows module developers to execute code during the upgrade 
+            process for a module.
+            
+            Below you will find stubbed out implementations of each, uncomment and populate with your own data
+            </summary>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.FeatureController.GetModifiedSearchDocuments(DotNetNuke.Entities.Modules.ModuleInfo,System.DateTime)">
+            <summary>
+            Gets the modified search documents for the DNN search engine indexer.
+            </summary>
+            <param name="moduleInfo">The module information.</param>
+            <param name="beginDate">The begin date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.FeatureController.ExportModule(System.Int32)">
+            -----------------------------------------------------------------------------
+            <summary>
+            ExportModule implements the IPortable ExportModule Interface
+            </summary>
+            <param name="moduleId">The Id of the module to be exported</param>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.FeatureController.ImportModule(System.Int32,System.String,System.String,System.Int32)">
+            -----------------------------------------------------------------------------
+            <summary>
+            ImportModule implements the IPortable ImportModule Interface
+            </summary>
+            <param name="moduleId">The Id of the module to be imported</param>
+            <param name="content">The content to be imported</param>
+            <param name="version">The version of the module to be imported</param>
+            <param name="userId">The Id of the user performing the import</param>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.FeatureController.UpgradeModule(System.String)">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpgradeModule implements the IUpgradeable Interface
+            </summary>
+            <param name="version">The current version of the module</param>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="T:FreeSource.Modules.Html.Components.HtmlModuleSettings">
+            <summary>
+            An example implementation of the <see cref="T:DotNetNuke.Entities.Modules.Settings.ModuleSettingAttribute"/>
+            </summary>
+            <remarks>
+            HtmlModuleSettings provides a strongly typed list of properties used by 
+            the HTML module.  Settings will automatically be serialized and deserialized
+            for storage in the underlying settings table.
+            </remarks>
+        </member>
+        <member name="T:FreeSource.Modules.Html.Components.HtmlModuleSettingsRepository">
+            <summary>
+            The <see cref="T:DotNetNuke.Entities.Modules.Settings.SettingsRepository`1"/> used for storing and retrieving <see cref="T:FreeSource.Modules.Html.Components.HtmlModuleSettings"/>
+            </summary>
+        </member>
+        <member name="T:FreeSource.Modules.Html.Components.HtmlTextController">
+            <summary>
+            The HtmlTextController is the Controller class for managing HtmlText information the HtmlText module
+            </summary>
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.HtmlTextController.GetMaximumVersionHistory(System.Int32)">
+            <summary>
+            GetMaximumVersionHistory retrieves the maximum number of versions to store for a module
+            </summary>
+            <param name="PortalID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.HtmlTextController.FormatHtmlText(System.Int32,System.String,FreeSource.Modules.Html.Components.HtmlModuleSettings,DotNetNuke.Entities.Portals.PortalSettings,System.Web.UI.Page)">
+            <summary>
+            FormatHtmlText formats HtmlText content for display in the browser
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="moduleId">The ModuleID</param>
+            <param name = "content">The HtmlText Content</param>
+            <param name = "settings">Module Settings</param>
+            <param name="portalSettings">The Portal Settings.</param>
+            <param name="page">The Page Instance.</param>
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.HtmlTextController.GetHtmlText(System.Int32)">
+            <summary>
+            Get HtmlText by ItemId
+            </summary>
+            <param name="itemId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FreeSource.Modules.Html.Components.HtmlTextController.GetTopHtmlText(System.Int32,System.String,System.Boolean)">
+            <summary>
+            GetTopHtmlText gets the most recent HtmlTextInfo object for the Module
+            </summary>
+            <param name="moduleId"></param>
+            <param name="locale"></param>
+            <param name="isPublished"></param>
+            <returns></returns>
+        </member>
+        <member name="P:FreeSource.Modules.Html.HtmlModuleBase.CurrentLocaleCode">
+            <summary>
+            Get the current locale code for current request to the portal.
+            </summary>
+        </member>
+        <member name="T:FreeSource.Modules.Html.Edit">
+            <summary>
+            The EditHtml PortalModuleBase is used to manage Html
+            </summary>
+        </member>
+        <member name="M:FreeSource.Modules.Html.Edit.FormatContent(System.String)">
+            <summary>
+              Formats the content to make it html safe.
+            </summary>
+            <param name = "htmlText">Content of the HTML.</param>
+            <returns></returns>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.phLocale">
+            <summary>
+            phLocale control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblLocale">
+            <summary>
+            lblLocale control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.ddlLocale">
+            <summary>
+            ddlLocale control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.phEdit">
+            <summary>
+            phEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblModuleTitle">
+            <summary>
+            lblModuleTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.txtModuleTitle">
+            <summary>
+            txtModuleTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.txtContent">
+            <summary>
+            txtContent control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblSummary">
+            <summary>
+            lblSummary control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.txtSummary">
+            <summary>
+            txtSummary control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.hfEditor">
+            <summary>
+            hfEditor control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.phPreview">
+            <summary>
+            phPreview control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.btnPreviewBack">
+            <summary>
+            btnPreviewBack control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.phPreviewVersion">
+            <summary>
+            phPreviewVersion control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.plPreviewVersion">
+            <summary>
+            plPreviewVersion control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblPreviewVersion">
+            <summary>
+            lblPreviewVersion control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.divPreviewArea">
+            <summary>
+            divPreviewArea control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.litPreviewTitle">
+            <summary>
+            litPreviewTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.litPreviewBody">
+            <summary>
+            litPreviewBody control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.phHistory">
+            <summary>
+            phHistory control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.plMaxVersions">
+            <summary>
+            plMaxVersions control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblMaxVersions">
+            <summary>
+            lblMaxVersions control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblHeaderVersion">
+            <summary>
+            lblHeaderVersion control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblHeaderDate">
+            <summary>
+            lblHeaderDate control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblHeaderTitle">
+            <summary>
+            lblHeaderTitle control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblHeaderContent">
+            <summary>
+            lblHeaderContent control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblHeaderUser">
+            <summary>
+            lblHeaderUser control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblHeaderPublished">
+            <summary>
+            lblHeaderPublished control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lblHeaderAction">
+            <summary>
+            lblHeaderAction control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.lvVersions">
+            <summary>
+            lvVersions control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.dpVersions">
+            <summary>
+            dpVersions control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.btnSave">
+            <summary>
+            btnSave control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.hlCancel">
+            <summary>
+            hlCancel control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.btnEdit">
+            <summary>
+            btnEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.btnPreview">
+            <summary>
+            btnPreview control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Edit.btnHistory">
+            <summary>
+            btnHistory control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="T:FreeSource.Modules.Html.Settings">
+            <summary>
+            The Settings ModuleSettingsBase is used to manage the settings for the HTML Module
+            </summary>
+        </member>
+        <member name="M:FreeSource.Modules.Html.Settings.LoadSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            LoadSettings loads the settings from the Database and displays them
+            </summary>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="M:FreeSource.Modules.Html.Settings.UpdateSettings">
+            -----------------------------------------------------------------------------
+            <summary>
+            UpdateSettings saves the modified settings to the Database
+            </summary>
+            -----------------------------------------------------------------------------
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.plReplaceTokens">
+            <summary>
+            plReplaceTokens control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.chkReplaceTokens">
+            <summary>
+            chkReplaceTokens control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.plSearchDescLength">
+            <summary>
+            plSearchDescLength control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.txtSearchDescLength">
+            <summary>
+            txtSearchDescLength control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.RegularExpressionValidator1">
+            <summary>
+            RegularExpressionValidator1 control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.lblEnableFallback">
+            <summary>
+            lblEnableFallback control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.rblEnableFallback">
+            <summary>
+            rblEnableFallback control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.phAdvanceSettings">
+            <summary>
+            phAdvanceSettings control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.lblMaxVersion">
+            <summary>
+            lblMaxVersion control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.ddlMaxVersion">
+            <summary>
+            ddlMaxVersion control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.lblCleanup">
+            <summary>
+            lblCleanup control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.cleanableListBox">
+            <summary>
+            cleanableListBox control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.btnCleanSelection">
+            <summary>
+            btnCleanSelection control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.Settings.btnCleanAll">
+            <summary>
+            btnCleanAll control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="T:FreeSource.Modules.Html.View">
+            <summary>
+            The HtmlModule Class provides the UI for displaying the Html
+            </summary>
+        </member>
+        <member name="M:FreeSource.Modules.Html.View.OnInit(System.EventArgs)">
+            <summary>
+            Page_Init runs when the control is initialized
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:FreeSource.Modules.Html.View.OnLoad(System.EventArgs)">
+            <summary>
+            Page_Load runs when the control is loaded
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:FreeSource.Modules.Html.View.lblContent_UpdateLabel(System.Object,DotNetNuke.UI.WebControls.DNNLabelEditEventArgs)">
+            <summary>
+            lblContent_UpdateLabel allows for inline editing of content
+            </summary>
+            <param name="source"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:FreeSource.Modules.Html.View.ModuleAction_Click(System.Object,DotNetNuke.Entities.Modules.Actions.ActionEventArgs)">
+            <summary>
+            ModuleAction_Click handles all ModuleAction events raised from the skin
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.lblContent">
+            <summary>
+            lblContent control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.editorDnnToobar">
+            <summary>
+            editorDnnToobar control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbEdit">
+            <summary>
+            tbEdit control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbSave">
+            <summary>
+            tbSave control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbCancel">
+            <summary>
+            tbCancel control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbBold">
+            <summary>
+            tbBold control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbItalic">
+            <summary>
+            tbItalic control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbUnderline">
+            <summary>
+            tbUnderline control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbJustifyLeft">
+            <summary>
+            tbJustifyLeft control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbJustifyCenter">
+            <summary>
+            tbJustifyCenter control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbJustifyRight">
+            <summary>
+            tbJustifyRight control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbOrderedList">
+            <summary>
+            tbOrderedList control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbUnorderedList">
+            <summary>
+            tbUnorderedList control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbOutdent">
+            <summary>
+            tbOutdent control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbIndent">
+            <summary>
+            tbIndent control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+        <member name="F:FreeSource.Modules.Html.View.tbCreateLink">
+            <summary>
+            tbCreateLink control.
+            </summary>
+            <remarks>
+            Auto-generated field.
+            To modify move field declaration from designer file to code-behind file.
+            </remarks>
+        </member>
+    </members>
+</doc>

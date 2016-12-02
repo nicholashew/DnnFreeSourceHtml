@@ -1,0 +1,33 @@
+﻿<h3>FreeSource_Html</h3>
+<p class="Contributor">
+	FreeSource <br />
+	<a href="mailto:nicholashew@users.noreply.github.com">nicholashew@users.noreply.github.com</a><br />
+	<a href=></a><br />
+</p>
+<hr/>
+<div class="License">
+	<h3>About the FreeSource_Html</h3>
+	<p class="Owner">
+		<b>Version 1.0.0</b><br /><br />
+	</p>
+	<p>Description</p>
+	<p>
+		This module is a Simple Multilingual HTML/Text module and implemented with DAL 2 DotNetNuke Data Layer. 
+		<br/>
+		Renders a block of HTML or Text content, the Html/Text module allows authorized users to edit the content in a administration page. 
+		<br/>
+		Optional tokens can be used that get replaced dynamically during display. 
+		<br/>
+		All versions of content are stored in the database including the ability to rollback to an older version. 
+		<br/>
+		An option to enable/disable fallback default language if localize content does not exists. 
+		<br/>
+		Admin with rights can configure Maximum Version History via module Advanced Settings, default value is 5.
+	</p>
+
+	<h4>Bug Fixes</h4>
+	<ul>
+		<li>N/A</li>
+	</ul>
+	
+</div>
