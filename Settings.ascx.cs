@@ -162,7 +162,11 @@ namespace FreeSource.Modules.Html
             {
                 //update module settings
                 ModuleSettings.ReplaceTokens = chkReplaceTokens.Checked;
-                ModuleSettings.SearchDescLength = int.Parse(txtSearchDescLength.Text);
+                int searchLength = 0;
+                if (int.TryParse(txtSearchDescLength.Text.Trim(), out searchLength))
+                {
+                    ModuleSettings.SearchDescLength = searchLength;
+                }
                 ModuleSettings.EnableFallback = bool.Parse(rblEnableFallback.SelectedValue);
                 var repo = new HtmlModuleSettingsRepository();
                 repo.SaveSettings(this.ModuleConfiguration, ModuleSettings);
