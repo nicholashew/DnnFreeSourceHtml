@@ -7,6 +7,23 @@
 <hr/>
 <div class="License">
 	<h3>About the FreeSource_Html</h3>
+
+	<p class="Owner">
+		<b>Version 1.0.2</b><br /><br />
+	</p>
+	<p>Description</p>
+	<p>
+		DNN 7.4.2 compatibility
+		<br/>
+		<ul>
+			<li>Refactor HtmlModuleSettingsRepository</li>			
+			<li>Updated DotNetNuke.Common.Requires usage</li>
+			<li>Replace HtmlTokenReplace with TokenReplace</li>
+		</ul>
+	</p>
+
+	<hr/>
+
 	<p class="Owner">
 		<b>Version 1.0.0</b><br /><br />
 	</p>
@@ -23,11 +40,5 @@
 		An option to enable/disable fallback default language if localize content does not exists. 
 		<br/>
 		Admin with rights can configure Maximum Version History via module Advanced Settings, default value is 5.
-	</p>
-
-	<h4>Bug Fixes</h4>
-	<ul>
-		<li>N/A</li>
-	</ul>
-	
+	</p>	
 </div>

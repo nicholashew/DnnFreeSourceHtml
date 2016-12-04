@@ -115,7 +115,7 @@ namespace FreeSource.Modules.Html.Components
 
         public void Update(HtmlTextInfo htmlText)
         {
-            Requires.NotNull(htmlText);
+            Requires.NotNull("htmlText", htmlText);
             Requires.PropertyNotNegative("htmlText", "ItemId", htmlText.ItemId);
             Requires.PropertyNotNegative("htmlText", "ModuleId", htmlText.ModuleId);
 

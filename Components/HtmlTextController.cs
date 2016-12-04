@@ -39,7 +39,7 @@ namespace FreeSource.Modules.Html.Components
 
         public HtmlTextController(IHtmlTextRepository htmlTextRepository)
         {
-            Requires.NotNull(htmlTextRepository);
+            Requires.NotNull("htmlTextRepository", htmlTextRepository);
 
             repository = htmlTextRepository;
         }
@@ -167,13 +167,14 @@ namespace FreeSource.Modules.Html.Components
 
             if (settings.ReplaceTokens)
             {
-                var tr = new HtmlTokenReplace(page)
+                //var tr = new HtmlTokenReplace(page)  //DNN 7.x not support
+                var tr = new TokenReplace() 
                 {
                     AccessingUser = UserController.Instance.GetCurrentUserInfo(),
                     DebugMessages = portalSettings.UserMode != PortalSettings.Mode.View,
                     ModuleId = moduleId,
                     PortalSettings = portalSettings
-                };
+                };                                
                 content = tr.ReplaceEnvironmentTokens(content);
             }
 
@@ -233,7 +234,7 @@ namespace FreeSource.Modules.Html.Components
             Requires.NotNull("htmlText", htmlText);
             //Requires.PropertyNotNegative("htmlText", "ItemId", htmlText.ItemId);
             Requires.PropertyNotNegative("htmlText", "ModuleId", htmlText.ModuleId);
-
+            
             //flag create new version if ItemId is not valid                                                       
             if (htmlText.ItemId == -1)
             {
@@ -259,7 +260,7 @@ namespace FreeSource.Modules.Html.Components
 
         public void DeleteHtmlText(HtmlTextInfo htmlText)
         {
-            Requires.NotNull(htmlText);
+            Requires.NotNull("htmlText", htmlText);
             Requires.PropertyNotNegative("htmlText", "ItemId", htmlText.ItemId);
 
             repository.Delete(htmlText);

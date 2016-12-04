@@ -14,6 +14,8 @@ namespace FreeSource.Modules.Html.Components
 {
     public class Constants
     {
+        internal const string ModuleSettingsPrefix = "FreeSource_HtmlText_";
+
         internal const string MaximumVersionHistoryPortalSettingName = "FreeSource_Html_MaximumVersionHistory";
 
         internal const int DefaultMaximumVersionHistory = 5;

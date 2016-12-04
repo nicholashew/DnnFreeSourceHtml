@@ -11,35 +11,77 @@
 */
 
 using System;
-using DotNetNuke.Entities.Modules.Settings;
+using System.Reflection;
+using DotNetNuke.Common;
+using DotNetNuke.Entities.Modules;
 
 namespace FreeSource.Modules.Html.Components
 {
     /// <summary>
-    /// An example implementation of the <see cref="ModuleSettingAttribute"/>
-    /// </summary>
-    /// <remarks>
     /// HtmlModuleSettings provides a strongly typed list of properties used by 
-    /// the HTML module.  Settings will automatically be serialized and deserialized
-    /// for storage in the underlying settings table.
-    /// </remarks>
+    /// the HTML module settings.
+    /// </summary>
     [Serializable]
     public class HtmlModuleSettings
     {
-        [ModuleSetting(Prefix = "FreeSource_HtmlText_")]
         public bool ReplaceTokens { get; set; } = false;
-        
-        [ModuleSetting(Prefix = "FreeSource_HtmlText_")]
+
         public int SearchDescLength { get; set; } = 100;
 
-        [ModuleSetting(Prefix = "FreeSource_HtmlText_")]
         public bool EnableFallback { get; set; } = true;
     }
 
     /// <summary>
-    /// The <see cref="SettingsRepository{T}"/> used for storing and retrieving <see cref="HtmlModuleSettings"/>
+    /// The <see cref="HtmlModuleSettingsRepository"/> used for storing and retrieving <see cref="HtmlModuleSettings"/>
     /// </summary>
-    public class HtmlModuleSettingsRepository : SettingsRepository<HtmlModuleSettings>
+    public class HtmlModuleSettingsRepository  //: SettingsRepository<HtmlModuleSettings>
     {
+
+        private readonly IModuleController _moduleController;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HtmlModuleSettingsRepository"/> class.</summary>
+        /// </summary>
+        public HtmlModuleSettingsRepository()
+        {
+            _moduleController = ModuleController.Instance;
+        }
+
+        public HtmlModuleSettings GetSettings(ModuleInfo moduleContext)
+        {
+            var settings = new HtmlModuleSettings();                        
+            if (moduleContext != null)
+            {
+                var moduleSettings = moduleContext.ModuleSettings;
+                Type type = settings.GetType();
+                PropertyInfo[] properties = type.GetProperties();
+
+                foreach (PropertyInfo property in properties)
+                {
+                    string key = Constants.ModuleSettingsPrefix + property.Name;
+                    if (moduleSettings.ContainsKey(key))
+                    {
+                        property.SetValue(settings, Convert.ChangeType(moduleSettings[key], property.PropertyType), null);
+                    }
+                }
+            }
+            return settings;
+        }
+
+        public void SaveSettings(ModuleInfo moduleContext, HtmlModuleSettings settings)
+        {
+            Requires.NotNull("moduleContext", moduleContext);
+            Requires.NotNull("settings", settings);
+
+            Type type = settings.GetType();
+            PropertyInfo[] properties = type.GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                string key = Constants.ModuleSettingsPrefix + property.Name;
+                string value = property.GetValue(settings, null).ToString();
+                _moduleController.UpdateModuleSetting(moduleContext.ModuleID, key, value);
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="FreeSource_Html" type="Module" version="01.00.00">
+    <package name="FreeSource_Html" type="Module" version="01.00.02">
       <friendlyName>FreeSource_Html</friendlyName>
       <description>nicholashew@users.noreply.github.com FreeSource_Html module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

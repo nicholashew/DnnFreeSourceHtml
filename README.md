@@ -67,11 +67,12 @@ Compatibility
 -------------
 
 - DNN 8.0
-	
+- DNN 7.4.2
+
 To do
 -----
 
-- [ ] Compatible with DNN 7.x
+- [x] Compatible with DNN 7.x
 - [ ] Implement logs
 
 Development Project References
