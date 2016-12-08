@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Components\HtmlTextRepository.cs" />
     <Compile Include="Components\IHtmlTextRepository.cs" />
+    <Compile Include="Components\ModuleSecurity.cs" />
     <Compile Include="Edit.ascx.cs">
       <DependentUpon>Edit.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

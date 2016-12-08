@@ -14,10 +14,16 @@ namespace FreeSource.Modules.Html.Components
 {
     public class Constants
     {
-        internal const string ModuleSettingsPrefix = "FreeSource_HtmlText_";
+        public const string ModuleSettingsPrefix = "FreeSource_HtmlText_";
+        public const string MaximumVersionHistoryPortalSettingName = "FreeSource_Html_MaximumVersionHistory";
+        public const int DefaultMaximumVersionHistory = 5;
 
-        internal const string MaximumVersionHistoryPortalSettingName = "FreeSource_Html_MaximumVersionHistory";
-
-        internal const int DefaultMaximumVersionHistory = 5;
+        public class ModulePermissionKey
+        {
+            public const string Edit = "EDIT_CONTENT";
+            public const string ViewHistory = "VIEW_HISTORY";
+            public const string Delete = "DELETE_CONTENT";
+            public const string Rollback = "ROLLBACK_CONTENT";
+        }        
     }
 }

@@ -90,6 +90,12 @@
                     <viewOrder>0</viewOrder>
                   </moduleControl>
                 </moduleControls>
+                <permissions>
+                  <permission code="FREESOURCE_HTML_MODULE" key="EDIT_CONTENT" name="Edit Content" />
+                  <permission code="FREESOURCE_HTML_MODULE" key="VIEW_HISTORY" name="View History" />
+                  <permission code="FREESOURCE_HTML_MODULE" key="DELETE_CONTENT" name="Delete Content" />
+                  <permission code="FREESOURCE_HTML_MODULE" key="ROLLBACK_CONTENT" name="Rollback Content" />
+                </permissions>
               </moduleDefinition>
             </moduleDefinitions>
           </desktopModule>

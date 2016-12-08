@@ -33,8 +33,23 @@ namespace FreeSource.Modules.Html
 
         private readonly HtmlTextController _htmlTextController = new HtmlTextController();
 
-        private int _topHtmlTextItemId = -1; //temp variable for lookup current active item during listview databound
+        private ModuleSecurity _moduleSecurity;
 
+        public ModuleSecurity moduleSecurity
+        {
+            get
+            {
+                if (_moduleSecurity == null)
+                {
+                    _moduleSecurity = new ModuleSecurity(ModuleContext);
+                }
+                return _moduleSecurity;
+            }
+        }
+
+        //temp variable for lookup current active item during listview databound
+        private int _topHtmlTextItemId = -1;
+                        
         #region Event Handlers
 
         protected override void OnInit(EventArgs e)
@@ -72,6 +87,8 @@ namespace FreeSource.Modules.Html
                     //load current locale content
                     var htmlText = _htmlTextController.GetTopHtmlText(ModuleId, CurrentLocaleCode, true);
                     DisplayContent(htmlText);
+
+                    EnsureButtonPermission();
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -108,6 +125,12 @@ namespace FreeSource.Modules.Html
         {
             try
             {
+                if (!moduleSecurity.IsAllowedToEditContent())
+                {
+                    DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, "Error occurred: ", LocalizeString("AccessDenied.Text"), ModuleMessage.ModuleMessageType.RedError);
+                    return;
+                }
+
                 string localeCode = ddlLocale.SelectedValue;
                 var htmlText = _htmlTextController.GetTopHtmlText(ModuleId, localeCode, true);
                 if (htmlText == null)
@@ -142,7 +165,7 @@ namespace FreeSource.Modules.Html
             catch (Exception exc)
             {
                 Exceptions.LogException(exc);
-                DotNetNuke.UI.Skins.Skin.AddModuleMessage(Page, "Error occurred: ", exc.Message, ModuleMessage.ModuleMessageType.RedError);
+                DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, "Error occurred: ", exc.Message, ModuleMessage.ModuleMessageType.RedError);
                 return;
             }
 
@@ -199,6 +222,11 @@ namespace FreeSource.Modules.Html
 
         protected void btnHistory_Click(object sender, EventArgs e)
         {
+            if (!moduleSecurity.IsAllowedToViewHistory())
+            {
+                DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, "Error occurred: ", LocalizeString("AccessDenied.Text"), ModuleMessage.ModuleMessageType.RedError);
+                return;
+            }
             if (phEdit.Visible)
             {
                 var editContent = new HtmlTextInfo()
@@ -253,7 +281,7 @@ namespace FreeSource.Modules.Html
                     .Replace("[VERSION]", htmlText.Version.ToString())
                     .Replace("[LOCALE]", htmlText.Locale);
                 btnRemove.OnClientClick = "return confirm(\"" + deleteMsg + "\");";
-                btnRemove.Visible = (UserInfo.IsSuperUser || PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName));
+                btnRemove.Visible = moduleSecurity.IsAllowedToDeleteContent();
 
                 //hide rollback button for current active item
                 if (_topHtmlTextItemId == -1)
@@ -266,7 +294,7 @@ namespace FreeSource.Modules.Html
                         .Replace("[VERSION]", htmlText.Version.ToString())
                         .Replace("[LOCALE]", htmlText.Locale);
                 btnRollback.OnClientClick = "return confirm(\"" + rollbackMsg + "\");";
-                btnRollback.Visible = (htmlText.ItemId != _topHtmlTextItemId);                
+                btnRollback.Visible = (htmlText.ItemId != _topHtmlTextItemId && moduleSecurity.IsAllowedToRollbackContent());                
             }
         }
 
@@ -279,29 +307,34 @@ namespace FreeSource.Modules.Html
                 switch (e.CommandName.ToLower())
                 {
                     case "remove":
-                        if (UserInfo.IsSuperUser || PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName))
+                        if (moduleSecurity.IsAllowedToDeleteContent())
                         {
                             _htmlTextController.DeleteHtmlText(htmlText);
                             DisplayVersions();
                         }
                         else
-                            DotNetNuke.UI.Skins.Skin.AddModuleMessage(Page, "Error occurred: ", LocalizeString("AccessDenied.Text"), ModuleMessage.ModuleMessageType.RedError);
+                            DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, "Error occurred: ", LocalizeString("AccessDenied.Text"), ModuleMessage.ModuleMessageType.RedError);
                         break;
                     case "rollback":
-                        //clone a new version as rollback, just like git, we are not rewriting the history.
-                        HtmlTextInfo newVersion = new HtmlTextInfo()
+                        if (moduleSecurity.IsAllowedToRollbackContent())
                         {
-                            ItemId = -1,
-                            ModuleId = htmlText.ModuleId,
-                            Locale = htmlText.Locale,
-                            ModuleTitle = htmlText.ModuleTitle,
-                            Content = htmlText.Content,
-                            Summary = htmlText.Summary,
-                            IsPublished = true
-                        };
-                        _htmlTextController.UpdateHtmlText(newVersion, true, _htmlTextController.GetMaximumVersionHistory(PortalId));
-                        DisplayVersions();
-                        setEditContent(newVersion);
+                            //clone a new version as rollback, just like git, we are not rewriting the history.
+                            HtmlTextInfo newVersion = new HtmlTextInfo()
+                            {
+                                ItemId = -1,
+                                ModuleId = htmlText.ModuleId,
+                                Locale = htmlText.Locale,
+                                ModuleTitle = htmlText.ModuleTitle,
+                                Content = htmlText.Content,
+                                Summary = htmlText.Summary,
+                                IsPublished = true
+                            };
+                            _htmlTextController.UpdateHtmlText(newVersion, true, _htmlTextController.GetMaximumVersionHistory(PortalId));
+                            DisplayVersions();
+                            setEditContent(newVersion);
+                        }
+                        else
+                            DotNetNuke.UI.Skins.Skin.AddModuleMessage(this, "Error occurred: ", LocalizeString("AccessDenied.Text"), ModuleMessage.ModuleMessageType.RedError);                        
                         break;
                     case "preview":
                         DisplayPreview(htmlText, true);
@@ -385,6 +418,12 @@ namespace FreeSource.Modules.Html
             btnEdit.Enabled = true;
             btnPreview.Enabled = false;
             btnHistory.Enabled = false;
+        }
+        
+        protected void EnsureButtonPermission()
+        {
+            btnSave.Visible = moduleSecurity.IsAllowedToEditContent();
+            btnHistory.Visible = moduleSecurity.IsAllowedToViewHistory();
         }
         #endregion
 

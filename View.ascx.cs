@@ -62,7 +62,8 @@ namespace FreeSource.Modules.Html
             try
             {
                 // edit in place.
-                EditorEnabled = (EditorEnabled && IsEditable && PortalSettings.UserMode == PortalSettings.Mode.Edit && !Settings.ReplaceTokens);
+                var modSecurity = new ModuleSecurity(ModuleContext);
+                EditorEnabled = modSecurity.IsAllowedToEditContent() && (EditorEnabled && IsEditable && PortalSettings.UserMode == PortalSettings.Mode.Edit && !Settings.ReplaceTokens);
                 
                 // toolbar visibility
                 if (!IsPostBack && EditorEnabled)
