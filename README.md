@@ -67,7 +67,7 @@ Exported Template File will contains contents as below:
 
 Compatibility
 -------------
-
+- DNN v09.2.0.366
 - DNN 8.0
 - DNN 7.4.2
 
