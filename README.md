@@ -12,6 +12,8 @@ Install and source packages can be downloaded from the releases page on GitHub.
 
 Drag the module to your page and start with experimenting!
 
+![dnnfreesourcehtml](https://user-images.githubusercontent.com/3435332/44080166-cdfd13f0-9fdd-11e8-8b93-13f52fca6fc6.gif)
+
 Usage
 -----
 
